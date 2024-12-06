@@ -1,0 +1,34 @@
+<?php
+include '../db_connection.php';
+
+$sql = "SELECT Office_ID, Name from office";
+
+
+
+// $sql = "INSERT INTO staff(First_Name, Last_Name, Phone_Num, Age, Gender, Position, Office_ID) VALUES ('')";
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Registration</title>
+</head>
+<body>
+    <h1>Staff Registration</h1>
+
+    <form method="post">
+        <input type="text" name="First_Name" id="First_Name" placeholder="First Name"><br>
+        <input type="text" name="Last_Name" id="Last_Name" placeholder="Last Name"><br>
+        <input type="number" name="Phone_Num" id="Phone_Num"><br>
+        <input type="number" name="Age" id="Age"><br>
+        <input type="text" name="Gender" id="Gender"><br>
+        <input type="text" name="Position" id="Position"><br>
+        
+
+    </form>
+    
+</body>
+</html>
