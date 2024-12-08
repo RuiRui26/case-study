@@ -1,20 +1,27 @@
 <?php
 include 'db_connection.php';
 
-$sql = "SELECT First_Name, Last_Name, Phone_Num 
-        FROM staff 
-        WHERE Position = 'Manager'";
+$sql = "SELECT office.Name AS Office_Name, 
+               office.City, 
+               manager.First_Name, 
+               manager.Last_Name, 
+               manager.Telephone
+        FROM office
+        JOIN manager ON office.Manager_ID = manager.Manager_ID";
+
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     echo "<table>";
-    echo "<tr><th>Name</th><th>Phone Number</th></tr>";
+    echo "<tr><th>Office Name</th><th>Manager Name</th><th>Phone Number</th></tr>";
     while ($row = $result->fetch_assoc()) {
-        echo "<tr><td>" . $row['First_Name'] . " " . $row['Last_Name'] . "</td><td>" . $row['Phone_Num'] . "</td></tr>";
+        // Displaying the office and manager details
+        echo "<tr><td>" . $row['Office_Name'] . "</td><td>" . "</td><td>" . 
+             $row['First_Name'] . " " . $row['Last_Name'] . "</td><td>" . $row['Telephone'] . "</td></tr>";
     }
     echo "</table>";
 } else {
-    echo "No results found.";
+    echo "No offices found.";
 }
 
 $conn->close();
