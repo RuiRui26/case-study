@@ -13,7 +13,7 @@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item"><a class="nav-link" href="#">Profile</a></li>
-                    <li class="nav-item"><a class="nav-link" href="dashboard.php">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="dashboard_manager.php">Dashboard</a></li>
                 </ul>
             </div>
         </div>

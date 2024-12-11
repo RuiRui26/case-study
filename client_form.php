@@ -55,7 +55,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <?php } ?>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">Add Client</button>
+        <div class="d-grid gap-2">
+                <button name="submit" type="submit" class="btn btn-dark btn-lg">Submit</button>
+        </div>
         
     </form>
 </div>

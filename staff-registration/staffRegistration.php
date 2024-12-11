@@ -6,7 +6,7 @@ $sql = "SELECT Office_ID, Name from office";
 $r = $conn->query($sql);
 $office = $r -> fetch_assoc();
 
-if(isset($_POST['submit'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $firstname= $_POST['First_Name'];
     $lastname= $_POST['Last_Name'];
     $password = $_POST['Password'];
@@ -37,37 +37,39 @@ if(isset($_POST['submit'])) {
 </head>
 <body>
 
+<?php include '../header.php'; ?>
+
     <div class="container-md p-4">
+        <h2>Staff Registration</h2>
         <form action="" method="post">
-            <h1 class="text-center p-3">Staff Registration</h1>
             <div class="mb-3">
                 <label for="First_Name" class="form-label">First Name</label>
-                <input class="form-control form-control-lg" type="text" name="First_Name" id="First_Name" placeholder="First Name">
+                <input class="form-control" type="text" name="First_Name" id="First_Name" placeholder="First Name">
             </div>
 
             <div class="mb-3">
                 <label for="Last_Name" class="form-label">Last Name</label>
-                <input class="form-control form-control-lg" type="text" name="Last_Name" id="Last_Name" placeholder="Last Name">
+                <input class="form-control" type="text" name="Last_Name" id="Last_Name" placeholder="Last Name">
             </div>
             
             <div class="mb-3">
                 <label for="Password" class="form-label">Password</label>
-                <input class="form-control form-control-lg" type="password" name="Password" id="Password" placeholder="Password">
+                <input class="form-control" type="password" name="Password" id="Password" placeholder="Password">
             </div>
 
             <div class="mb-3">
                 <label for="Phone_Num" class="form-label">Phone Number</label>
-                <input class="form-control form-control-lg" type="number" name="Phone_Num" id="Phone_Num" placeholder="Phone Number">
+                <input class="form-control" type="number" name="Phone_Num" id="Phone_Num" placeholder="Phone Number">
             </div>
 
             <div class="mb-3">
                 <label for="Age" class="form-label">Age</label>
-                <input class="form-control form-control-lg" type="number" name="Age" id="Age" placeholder="Age">
+                <input class="form-control" type="number" name="Age" id="Age" placeholder="Age">
             </div>
 
             <div class="mb-3">
                 <label for="Gender" class="form-label">Gender</label>
-                <select class="form-select form-select-lg" name="Gender" id="Gender">
+                <select class="form-select" name="Gender" id="Gender">
                     <option hidden>Gender</option>
                     <option value="Female">Female</option>
                     <option value="Male">Male</option>
@@ -77,7 +79,7 @@ if(isset($_POST['submit'])) {
 
             <div class="mb-3">
                 <label for="Gender" class="form-label">Position</label>
-                <select class="form-select form-select-lg" name="Position" id="Position">
+                <select class="form-select" name="Position" id="Position">
                     <option hidden>Position</option>
                     <option value="Senior Instructor">Senior Instructor</option>
                     <option value="Instructor">Instructor</option>
@@ -86,7 +88,7 @@ if(isset($_POST['submit'])) {
             </div>
             <div class="mb-3">
                 <label for="Office_Name" class="form-label">Office</label>
-                <select class="form-select form-select-lg" name="Office_Name" id="Office_Name">
+                <select class="form-select" name="Office_Name" id="Office_Name">
                     <option hidden>Office</option>
                     <?php
                         while($office = $r -> fetch_assoc()){
@@ -104,6 +106,8 @@ if(isset($_POST['submit'])) {
 
         </form>
     </div>
+
+    <?php include '../footer.php'; ?>
     
 </body>
 </html>
