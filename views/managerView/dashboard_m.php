@@ -32,13 +32,14 @@
                 while($office = $r -> fetch_assoc()){
                 ?>
                     <a class="link-dark link-underline link-underline-opacity-0" href="dashboard_m_s.php?address=<?php echo $office['Address']?>">
-                        <li class="list-group-item"><h1><?php echo $office['Name'] ?></h1> <p>managed by <?php echo $office['First_Name'] ?></p></li>
+                        <li class="list-group-item"><h2><?php echo $office['Name'] ?></h2> <p>managed by <?php echo $office['First_Name'] ?></p></li>
                     </a>
-                    <br>
+                    
                 <?php
                 }
             ?>
             </ul>
+            <br>
         </div>
     </div>
     <?php  include '../../footer.php'  ?>
