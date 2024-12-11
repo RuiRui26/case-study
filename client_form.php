@@ -8,10 +8,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
     $gender = $_POST['gender'];
+    $age = $_POST['age'];
     $office_id = $_POST['office_id'];
 
-    $sql = "INSERT INTO client (First_Name, Last_Name, Gender, Office_ID) 
-            VALUES ('$first_name', '$last_name', '$gender', '$office_id')";
+    $sql = "INSERT INTO client (First_Name, Last_Name, Gender, Age, Office_ID) 
+            VALUES ('$first_name', '$last_name', '$gender', '$age', '$office_id')";
 
     if ($conn->query($sql)) {
         echo "<div class='alert alert-success'>Client added successfully!</div>";
@@ -42,6 +43,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </select>
         </div>
         <div class="mb-3">
+            <label for="age" class="form-label">Age</label>
+            <input type="text" name="age" id="age" class="form-control" required>
+        </div>
+        <div class="mb-3">
             <label for="office_id" class="form-label">Office</label>
             <select name="office_id" id="office_id" class="form-select" required>
                 <option value="">Select Office</option>
@@ -51,6 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Add Client</button>
+        
     </form>
 </div>
 
