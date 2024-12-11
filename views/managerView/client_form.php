@@ -1,6 +1,6 @@
 <?php
-include 'header.php';
-include 'db_connection.php';
+include 'header_manager.php';
+include '../../db_connection.php';
 
 $offices = $conn->query("SELECT Office_ID, Name FROM office");
 
@@ -58,10 +58,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="d-grid gap-2">
                 <button name="submit" type="submit" class="btn btn-dark btn-lg">Submit</button>
         </div>
+        <br>
         
     </form>
 </div>
 
 <?php
-include 'footer.php';
+include '../../footer.php';
 ?>

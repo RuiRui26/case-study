@@ -1,5 +1,5 @@
 <?php
-include '../db_connection.php';
+include '../../db_connection.php';
 
 $sql = "SELECT Office_ID, Name from office";
 
@@ -34,10 +34,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>Staff Registration</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
 </head>
-<body>
+<body >
 
-<?php include '../header.php'; ?>
+<?php include 'header_manager.php'; ?>
 
     <div class="container-md p-4">
         <h2>Staff Registration</h2>
@@ -107,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </form>
     </div>
 
-    <?php include '../footer.php'; ?>
+    <?php include '../../footer.php'; ?>
     
 </body>
 </html>

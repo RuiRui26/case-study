@@ -25,7 +25,7 @@
             <?php
                 while($office = $r -> fetch_assoc()){
                 ?>
-                    <a class="link-dark link-underline link-underline-opacity-0" href="cities/<?php echo $office['City'] ?>/dashboard_<?php echo $office['City'] ?>.php">
+                    <a class="link-dark link-underline link-underline-opacity-0" href="dashboard_m.php?city=<?php echo $office['City'] ?>">
                         <li class="list-group-item"><h1><?php echo $office['City'] ?></h1></li>
                     </a>
                     <br>

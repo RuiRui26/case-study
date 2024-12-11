@@ -12,7 +12,8 @@
             <a class="navbar-brand" href="dashboard.php">EasyDrive</a>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link" href="#">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="clients.php">Clients</a></li>
+                    <li class="nav-item"><a class="nav-link" href="staff.php">Staff</a></li>
                     <li class="nav-item"><a class="nav-link" href="dashboard.php">Dashboard</a></li>
                 </ul>
             </div>
