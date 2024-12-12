@@ -26,24 +26,30 @@ if ($selected_office_id) {
     echo "<h3>Total Clients in Selected Office (Gender Breakdown)</h3>";
     echo "<p>Male Clients: " . $male_count . "</p>";
     echo "<p>Female Clients: " . $female_count . "</p>";
-    
-    
     $client_list_sql = "
-        SELECT c.First_Name, c.Last_Name, c.Gender, c.registration_date, o.Name AS Office_Name
+        SELECT 
+            c.First_Name, 
+            c.Last_Name, 
+            c.Gender, 
+            c.registration_date, 
+            o.Name AS Office_Name,
+            dt.Client_Passed AS Test_Passed,
+            COUNT(dt.DrivingTest_ID) AS Test_Attempts
         FROM client c
         JOIN office o ON c.Office_ID = o.Office_ID
+        LEFT JOIN drivingtest dt ON c.Client_ID = dt.Client_ID
         WHERE c.Office_ID = ?
+        GROUP BY c.Client_ID, dt.Client_Passed
     ";
-    
-  
+
     $stmt = $conn->prepare($client_list_sql);
     $stmt->bind_param("i", $selected_office_id); 
     $stmt->execute();
     $result = $stmt->get_result();
 
-    echo "<h3>Clients in Selected Office</h3>";
+    echo "<h3>Clients in Selected Office with Test Information</h3>";
     echo "<table border='1' cellpadding='10'>";
-    echo "<tr><th>Client Name</th><th>Gender</th><th>Registration Date</th><th>Office</th></tr>";
+    echo "<tr><th>Client Name</th><th>Gender</th><th>Registration Date</th><th>Office</th><th>Test Passed</th><th>Test Attempts</th></tr>";
 
     while ($row = $result->fetch_assoc()) {
         echo "<tr>
@@ -51,6 +57,8 @@ if ($selected_office_id) {
                 <td>" . $row['Gender'] . "</td>
                 <td>" . $row['registration_date'] . "</td>
                 <td>" . $row['Office_Name'] . "</td>
+                <td>" . ($row['Test_Passed'] == 1 ? 'Yes' : 'No') . "</td>
+                <td>" . $row['Test_Attempts'] . "</td>
               </tr>";
     }
     echo "</table>";
@@ -72,9 +80,7 @@ while ($row = $city_result->fetch_assoc()) {
     echo "<tr><td>" . $row['City'] . "</td><td>" . $row['Total_Clients'] . "</td></tr>";
 }
 echo "</table>";
-
 ?>
-
 
 <form method="POST" action="">
     <label for="office_id">Select Office:</label>
