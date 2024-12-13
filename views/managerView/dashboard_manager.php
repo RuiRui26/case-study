@@ -1,7 +1,10 @@
 <?php
     include '../../db_connection.php';
     
-    $sql = "SELECT City from office group by City";
+    $sql = "SELECT City,
+            COUNT(*) as totaloffices
+            from office
+            group by City";
 
     $r = $conn->query($sql);
 ?>
@@ -13,10 +16,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <style>
-        
         a li:hover{
             background-color: #daf0ff;
             transition: 0.4s;
+        }
+
+        a li span{
+            font-size: .7em;
         }
     </style>
 </head>
@@ -33,7 +39,7 @@
                 while($office = $r -> fetch_assoc()){
                 ?>
                     <a class="link-dark link-underline link-underline-opacity-0 " href="dashboard_m.php?city=<?php echo $office['City'] ?>">
-                        <li class="list-group-item"><h2><?php echo $office['City'] ?></h2></li>
+                        <li class="list-group-item"><h2><?php echo $office['City'] ?> <span>(<?php echo $office['totaloffices'] ?>)</span></h2></li>
                     </a>
                     
                 <?php

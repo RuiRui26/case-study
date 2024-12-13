@@ -1,6 +1,6 @@
 <?php
 include 'header.php';
-include 'db_connection.php';
+include '../../db_connection.php';
 
 // Fetch Clients, Instructors, and Cars
 $clients = $conn->query("SELECT Client_ID, CONCAT(First_Name, ' ', Last_Name) AS Name FROM client");
@@ -17,8 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $mileage = $_POST['mileage'];
     $fee = $_POST['fee'];
 
-    $sql = "INSERT INTO lesson (Client_ID, Instructor_ID, Car_ID, Date, Time_Start, Time_End, Mileage_Used, Fee)
-            VALUES ('$client_id', '$instructor_id', '$car_id', '$date', '$start_time', '$end_time', '$mileage', '$fee')";
+    $sql = "INSERT INTO lesson (Client_ID, Instructor_ID, Car_ID, Date, Time_Start, Time_End, Fee)
+            VALUES ('$client_id', '$instructor_id', '$car_id', '$date', '$time_start', '$time_end', '$fee')";
 
     if ($conn->query($sql)) {
         echo "<div class='alert alert-success'>Lesson booked successfully!</div>";
@@ -71,10 +71,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <input type="time" name="end_time" id="end_time" class="form-control" min="08:00" max="20:00" required>
         </div>
         <div class="mb-3">
-            <label for="mileage" class="form-label">Mileage Used</label>
-            <input type="number" name="mileage" id="mileage" class="form-control" required>
-        </div>
-        <div class="mb-3">
             <label for="fee" class="form-label">Fee</label>
             <input type="number" step="0.01" name="fee" id="fee" class="form-control" required>
         </div>
@@ -82,4 +78,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </form>
 </div>
 
-<?php include 'footer.php'; ?>
+<?php include '../../footer.php'; ?>

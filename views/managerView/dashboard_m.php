@@ -29,7 +29,7 @@
 
         }
 
-        li:hover{
+        .list-group-item:hover{
             background-color: #daf0ff;
             transition: 0.4s;
         }
