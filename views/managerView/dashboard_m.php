@@ -43,8 +43,8 @@
 
     <div class="center">
         <div class="dashboard">
-            <h3>please pick an office:</h3><br>
             <ul class="list-group">
+            <li class="list-group-item" style="background-color: #003d80; color: white;"><h1>Offices</h1></li>
             <?php
                 while($office = $r -> fetch_assoc()){
                 ?>

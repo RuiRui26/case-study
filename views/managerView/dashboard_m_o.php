@@ -66,7 +66,7 @@
                         <li class="list-group-item">
                             <h2 style="border-bottom: 1px solid black; padding: 10px;"><?php echo $manager['First_Name'] . " " . $manager['Last_Name'] ?></h2>
                             <div class="details">
-                                <h4>Telephone: <span class="normal"><?php echo $manager['Telephone'] ?></span></h4>
+                                <h4>    Telephone: <span class="normal"><?php echo $manager['Telephone'] ?></span></h4>
                                 <h4>Gender: <span class="normal"><?php echo $manager['Gender'] ?></span></h4>
                                 <h4>Age: <span class="normal"><?php echo $manager['Age'] ?></span></h4>
                             </div>

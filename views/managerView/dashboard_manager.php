@@ -13,8 +13,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <style>
-        li:hover{
-            background-color: #ddead1;
+        
+        a li:hover{
+            background-color: #daf0ff;
             transition: 0.4s;
         }
     </style>
@@ -26,13 +27,13 @@
 
     <div class="center">
         <div class="dashboard">
-            <h3>please pick a city:</h3><br>
             <ul class="list-group">
+            <li class="list-group-item" style="background-color: #003d80; color: white;"><h1>Cities</h1></li>
             <?php
                 while($office = $r -> fetch_assoc()){
                 ?>
                     <a class="link-dark link-underline link-underline-opacity-0 " href="dashboard_m.php?city=<?php echo $office['City'] ?>">
-                        <li class="list-group-item"><h1><?php echo $office['City'] ?></h1></li>
+                        <li class="list-group-item"><h2><?php echo $office['City'] ?></h2></li>
                     </a>
                     
                 <?php
