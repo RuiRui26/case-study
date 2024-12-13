@@ -15,7 +15,7 @@
 </head>
 <body>
     <?php  include 'header_manager.php'  ?>
-    <?php  include '../../dashboard.php'  ?>
+    <?php  include 'dashboard.php'  ?>
     <br>
 
     <div class="center">
@@ -25,7 +25,7 @@
             <?php
                 while($office = $r -> fetch_assoc()){
                 ?>
-                    <a class="link-dark link-underline link-underline-opacity-0" href="dashboard_m.php?city=<?php echo $office['City'] ?>">
+                    <a class="link-dark link-underline link-underline-opacity-0 " href="dashboard_m.php?city=<?php echo $office['City'] ?>">
                         <li class="list-group-item"><h1><?php echo $office['City'] ?></h1></li>
                     </a>
                     

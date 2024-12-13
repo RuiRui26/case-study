@@ -21,7 +21,7 @@
 <body>
 
     <?php  include 'header_manager.php'  ?>
-    <?php  include '../../dashboard.php'  ?>
+    <?php  include 'dashboard.php'  ?>
     <br>
 
     <div class="center">
