@@ -4,7 +4,7 @@
     $city = $_GET['city'];
         
     $sql = "SELECT * from office as O
-            inner join manager  as M
+            join manager as M
             on O.Manager_ID = M.Manager_ID
             where O.city = '$city';";
 
@@ -17,6 +17,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Glasgow</title>
+
+    <style>
+        span{
+            font-size: 0.6em;
+            font-weight: normal;
+        }
+
+        .fulladdress{
+            font-size: 1.2em;
+
+        }
+
+        li:hover{
+            background-color: #daf0ff;
+            transition: 0.4s;
+        }
+    </style>
 </head>
 <body>
 
@@ -32,7 +49,8 @@
                 while($office = $r -> fetch_assoc()){
                 ?>
                     <a class="link-dark link-underline link-underline-opacity-0" href="dashboard_m_s.php?address=<?php echo $office['Address']?>">
-                        <li class="list-group-item"><h2><?php echo $office['Name'] ?></h2> <p>managed by <?php echo $office['First_Name'] ?></p></li>
+                        <li class="list-group-item"><h2><?php echo $office['Name'] ?> <span>managed by <?php echo $office['First_Name'] . " " . $office['Last_Name'] ?></span></h2>
+                        <p class="fulladdress"><?php echo $city . ", " . $office['Address'] ?></p></li>
                     </a>
                     
                 <?php

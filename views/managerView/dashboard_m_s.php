@@ -2,20 +2,6 @@
     include '../../db_connection.php';
         
     $address = $_GET['address'];
-    $staff_info = "SELECT 
-                    s.Staff_ID AS ID, 
-                    s.First_Name, 
-                    s.Last_Name, 
-                    s.Age,
-                    s.Gender,
-                    'Staff' AS Role, 
-                    s.Position, 
-                    o.Name AS Office
-                    FROM staff s
-                    LEFT JOIN office o ON s.Office_ID = o.Office_ID WHERE o.Address = '$address'
-                    ";
-
-    $r = $conn->query($staff_info);
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +17,16 @@
                 position: absolute;
                 bottom: 0;
                 left: 0;
-            }
+        }
+
+        li:hover{
+        background-color: #daf0ff;
+        transition: 0.4s;
+        }
+
+        a button{
+            margin-bottom: 30px;
+        }
     </style>
 </head>
 <body>
@@ -51,7 +46,7 @@
                     <a class="nav-link" href="dashboard_m_c.php?address=<?php echo $address ?>">Clients</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Others</a>
+                    <a class="nav-link" href="dashboard_m_o.php?address=<?php echo $address ?>">Others</a>
                 </li>
             </ul>
             <br>
@@ -70,24 +65,36 @@
                 ?>
             
             <ul class="list-group">
-            <?php
-                while($staff = $r -> fetch_assoc()){
-                ?>
-                    <a class="link-dark link-underline link-underline-opacity-0" href="dashboard_m_s<?php echo $staff['ID'] ?>.php">
-                        <li class="list-group-item"><h2><?php echo $staff['First_Name'] ?></h2> <p><?php echo $staff['Position'] ?></p></li>
-                    </a>
                 <?php
-                }
-            ?>
+                    $staff_info = "SELECT 
+                                    s.Staff_ID AS ID, 
+                                    s.First_Name, 
+                                    s.Last_Name, 
+                                    s.Age,
+                                    s.Gender,
+                                    'Staff' AS Role, 
+                                    s.Position, 
+                                    o.Name AS Office
+                                    FROM staff s
+                                    JOIN office o ON s.Office_ID = o.Office_ID WHERE o.Address = '$address'
+                                    ";
+
+                    $r = $conn->query($staff_info);
+
+                    while($staff = $r -> fetch_assoc()){
+                    ?>
+                        <a class="link-dark link-underline link-underline-opacity-0" href="dashboard_m_s.php?staffif=<?php echo $staff['ID'] ?>">
+                            <li class="list-group-item"><h2><?php echo $staff['First_Name'] . " " . $staff['Last_Name'] ?></h2>
+                            <p><?php echo $staff['Position'] ?></p></li>
+                        </a>
+                    <?php
+                    }
+                ?>
             </ul>
             <br>
         </div>
-        <a href="staff_form.php"><button type="button" class="btn btn-primary">Add New Staff</button></a>
+    <a href="staff_form.php"><button type="button" class="btn btn-primary">Add New Staff</button></a>    
     </div>
-    <footer class="bg-light text-center text-lg-start">
-        <div class="text-center p-3">
-            &copy; 2024 EasyDrive School of Motoring
-        </div>
-    </footer>
+    <?php include '../../footer.php' ?>
 </body>
 </html>

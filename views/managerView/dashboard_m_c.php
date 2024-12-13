@@ -61,7 +61,7 @@
         .sort{
             display: flex;
             flex-direction: row;
-            
+            margin: 0 0 20px 0;
         }
 
         .sort .form{
@@ -88,10 +88,10 @@
                     <a class="nav-link" href="dashboard_m_s.php?address=<?php echo $address ?>">Staff</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Clients</a>
+                    <a class="nav-link active" aria-current="page" href="">Clients</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Others</a>
+                    <a class="nav-link" href="dashboard_m_o.php?address=<?php echo $address ?>">Others</a>
                 </li>
             </ul>
             <br>
@@ -135,43 +135,41 @@
             
                 
             <table class="table table-hover">
-            <thead>
-                <tr class="table-primary">
-                <th scope="col">ID</th>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">Age</th>
-                <th scope="col">Gender</th>
-                <th scope="col">Times Sat Through Driving Test</th>
-                <th scope="col">Passed Driving Test?</th>
-                </tr>
-            </thead>
-            <tbody>
-            <?php
-                while($client = $r -> fetch_assoc()){
-                ?>
-                    <tr>   
-                    <th scope="row"><?php echo $client['ID']?></th>
-                    <td><?php echo $client['First_Name']?></td>
-                    <td><?php echo $client['Last_Name']?></td>
-                    <td><?php echo $client['Age']?></td>
-                    <td><?php echo $client['Gender']?></td>
-                    <td><?php echo $client['Total']?></td>
-                    <td><?php echo $client['Passed']?></td>
+                <thead>
+                    <tr class="table-primary">
+                    <th scope="col">ID</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Times Sat Through Driving Test</th>
+                    <th scope="col">Passed Driving Test?</th>
                     </tr>
+                </thead>
+                <tbody>
                 <?php
-                }
-            ?>
+                    while($client = $r -> fetch_assoc()){
+                    ?>
+                        <tr>   
+                        <th scope="row"><?php echo $client['ID']?></th>
+                        <td><?php echo $client['First_Name']?></td>
+                        <td><?php echo $client['Last_Name']?></td>
+                        <td><?php echo $client['Age']?></td>
+                        <td><?php echo $client['Gender']?></td>
+                        <td><?php echo $client['Total']?></td>
+                        <td><?php echo $client['Passed'] > 0 ? 'Passed' : 'Not Passed Yet'; ?></td>
+                        </tr>
+                    <?php
+                    }
+                ?>
+                </tbody>
+            </table>
             </ul>
             
             <br>
         </div>
         
     </div>
-    <footer class="bg-light text-center text-lg-start">
-        <div class="text-center p-3">
-            &copy; 2024 EasyDrive School of Motoring
-        </div>
-    </footer>
+    <?php include '../../footer.php' ?>
 </body>
 </html>
