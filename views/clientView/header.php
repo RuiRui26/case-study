@@ -9,12 +9,6 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="">EasyDrive</a>
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link" href="#">Profile</a></li>
-                    <li class="nav-item"><a class="nav-link" href="dashboard_manager.php">Dashboard</a></li>
-                </ul>
-            </div>
+            <a class="navbar-brand" href="dashboard.php">EasyDrive</a>
         </div>
     </nav>

@@ -50,33 +50,35 @@
     </style>
 </head>
 <body>
-    <header>
-        <h1>Dashboard</h1>
-    </header>
+    
+    <?php  include 'header_staff.php'  ?>
+    <?php  include 'dashboard.php'  ?>
 
     <div class="section-header">General Management</div>
     <div class="button-container">
-        <button class="button" onclick="loadPage('../client_display.php')">Client Display</button>
-        <button class="button" onclick="loadPage('../interview_details.php')">Interview Details</button>
-        <button class="button" onclick="loadPage('../clients_passed.php')">Passed</button>
-        <button class="button" onclick="loadPage('../client_failing.php')">Failing</button>
-        <button class="button" onclick="loadPage('../staff.php')">Staff</button>
+        <button class="button" onclick="loadPage('../../client_display.php')">Client Display</button>
+        <button class="button" onclick="loadPage('../../interview_details.php')">Interview Details</button>
+        <button class="button" onclick="loadPage('../../clients_passed.php')">Passed</button>
+        <button class="button" onclick="loadPage('../../client_failing.php')">Failing</button>
+        <button class="button" onclick="loadPage('../../staff.php')">Staff</button>
     </div>
 
     <div class="section-header">Car Management</div>
     <div class="button-container">
-        <button class="button" onclick="loadPage('../cars.php')">Cars</button>
-        <button class="button" onclick="loadPage('../average_miles.php')">Average Miles Lessons</button>
-        <button class="button" onclick="loadPage('../cars_fault.php')">Cars With Faults</button>
-        <button class="button" onclick="loadPage('../cars_instructor_office.php')">Cars Instructor Assigned</button>
+        <button class="button" onclick="loadPage('../../cars.php')">Cars</button>
+        <button class="button" onclick="loadPage('../../average_miles.php')">Average Miles Lessons</button>
+        <button class="button" onclick="loadPage('../../cars_fault.php')">Cars With Faults</button>
+        <button class="button" onclick="loadPage('../../cars_instructor_office.php')">Cars Instructor Assigned</button>
     </div>
      <!-- Okay Lang to Naka Iframe? -->
-    <iframe id="content-frame" src="../client_display.php"></iframe>
+    <iframe id="content-frame" src="../../client_display.php"></iframe>
 
     <script>
         function loadPage(page) {
             document.getElementById('content-frame').src = page;
         }
     </script>
+
+    <?php  include '../../footer.php'  ?>
 </body>
 </html>
