@@ -1,0 +1,33 @@
+.main{
+
+}
+
+.main .sidenav{
+    border-top: 2px solid #ccc;
+
+}
+.main .sidenav #nav{
+    width: 20%;
+    padding: 15px 15px;
+    background-color: #8cadbb31;
+    display: flex;
+}
+
+.main .sidenav #nav a{
+    border-radius: 10px;
+}
+
+.main .sidenav #nav a h4{
+    font-weight: 400;
+    transition: 0.2s;
+}
+
+.main .sidenav #nav a h4:hover{
+    font-weight: 700;
+    color: #3c4f57;
+}
+
+.main .sidenav #nav a h4 span{
+    font-size: .7em;
+}
+

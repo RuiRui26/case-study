@@ -1,0 +1,36 @@
+.profile{
+    margin: 20px 40px;
+}
+
+.personalinfo{
+    border-radius: 10px;
+    margin: 15px 0;
+    padding: 10px 20px;
+
+    background-color: #8cadbb31;
+}
+
+.personalinfo p{
+    font-size: 1.2em;
+    font-weight: 500;
+}
+
+.personalinfo .infos{
+    background-color: white;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px 0;
+
+}
+
+.personalinfo .infos div{
+    text-align: center;
+}
+
+.personalinfo .infos .title{
+
+}
+
+.personalinfo .infos .data{
+
+}

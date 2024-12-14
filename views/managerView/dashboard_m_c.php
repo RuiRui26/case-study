@@ -1,7 +1,18 @@
 <?php
     include '../../db_connection.php';
+    include 'manager_session.php';
         
     $address = $_GET['address'];
+
+    $sql = "SELECT city from office where address = '$address'";
+
+    $data = $conn->query($sql);
+    $city = $data -> fetch_assoc();
+
+    $c = $city['city'];
+
+
+
 
     $sort_column = isset($_GET['sort']) ? $_GET['sort'] : 'c.Client_ID';
     $order = isset($_GET['order']) ? $_GET['order'] : 'ASC';
@@ -15,31 +26,6 @@
     if (!in_array($order, $valid_order)) {
         $order = 'ASC';
     }
-
-    $client_info = "SELECT 
-                    c.Client_ID AS ID, 
-                    c.*,
-                    o.Name AS Office,
-                    s.*,
-                    i.*,
-                    (SELECT COUNT(*) 
-                        FROM drivingtest t
-                        WHERE t.client_ID = c.Client_ID AND t.is_Passed = '1') AS Passed,
-                    (SELECT COUNT(*) 
-                        FROM drivingtest t
-                        WHERE t.client_ID = c.Client_ID) AS Total
-                    FROM client c
-                    JOIN office o ON c.Office_ID = o.Office_ID
-                    JOIN lesson l on l.client_id = c.client_ID
-                    join staff s on l.instructor_ID = s.staff_ID
-                    JOIN interview i on i.client_ID = c.client_id
-                    WHERE o.Address = '$address'
-                    ORDER BY $sort_column $order
-                    ";
-
-    $desc = "DESC";
-
-    $r = $conn->query($client_info);
 ?>
 
 <!DOCTYPE html>
@@ -47,7 +33,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Birmingham</title>
+    <title>Client View</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="dashboard_m.css">
 
     <style>
         footer{
@@ -73,13 +62,43 @@
 
     </style>
 </head>
-<body>
+<body style="font-family:'Poppins';">
 
     <?php  include 'header_manager.php'  ?>
     <?php  include 'dashboard.php'  ?>
     <br>
 
-    <div class="center">
+    <div class="main">
+        <div class="sidenav">
+            <nav id="nav" class="nav">
+                <div>
+                    <a id="first" class="nav-link link-dark link-underline-opacity-0" style="font-size: 2em ;font-weight: 700;">
+                        <svg style="padding-bottom:5px" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-building-fill" viewBox="0 0 16 16">
+                            <path d="M3 0a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h3v-3.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5V16h3a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1zm1 2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3.5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5M4 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zM7.5 5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5m2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zM4.5 8h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5m2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3.5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5"/>
+                        </svg>
+                        CITIES
+                    </a>
+                        <?php
+                            $cities = "SELECT City,
+                            COUNT(*) as totaloffices
+                            from office
+                            group by City";
+                
+                            $r = $conn->query($cities);
+                            while($city = $r -> fetch_assoc()){
+                        ?>
+                            <a class="nav-link link-dark link-underline-opacity-0" href="dashboard_m.php?city=<?php echo $city['City'] ?>">
+                                <?php if($city['City'] === $c): ?>
+                                    <h4 style="font-weight: 700;"><?php echo $city['City'] ?> <span>(<?php echo $city['totaloffices'] ?>)</span></h4> 
+                                <?php else: ?>
+                                    <h4><?php echo $city['City'] ?> <span>(<?php echo $city['totaloffices'] ?>)</span></h4>
+                                <?php endif ?>
+                            </a>
+                        <?php
+                        }
+                    ?>
+                </div>
+            </nav>
         <div class="dashboard">
             <h1><?php echo $address ?> Office</h1><br>
             <ul class="nav nav-tabs">
@@ -105,8 +124,8 @@
                     $r2 = $conn->query($total_client);
                 ?>
                 <div class="container-fluid">
-                    <?php while($t_c = $r2 -> fetch_assoc()){ ?>
-                    Total number of clients: <?php echo $t_c['Total_Client'] ?>
+                    <?php while($tc = $r2 -> fetch_assoc()){ ?>
+                    Total number of clients: <?php echo $tc['Total_Client'] ?>
                     <?php
                         }
                     ?>
@@ -148,6 +167,30 @@
                 </thead>
                 <tbody>
                 <?php
+                    $client_info = "SELECT 
+                    c.Client_ID AS ID, 
+                    c.*,
+                    o.Name AS Office,
+                    s.*,
+                    i.*,
+                    (SELECT COUNT(*) 
+                        FROM drivingtest t
+                        WHERE t.client_ID = c.Client_ID AND t.is_Passed = '1') AS Passed,
+                    (SELECT COUNT(*) 
+                        FROM drivingtest t
+                        WHERE t.client_ID = c.Client_ID) AS Total
+                    FROM client c
+                    JOIN office o ON c.Office_ID = o.Office_ID
+                    JOIN lesson l on l.client_id = c.client_ID
+                    join staff s on l.instructor_ID = s.staff_ID
+                    JOIN interview i on i.client_ID = c.client_id
+                    WHERE o.Address = '$address'
+                    ORDER BY $sort_column $order
+                    ";
+
+                    $desc = "DESC";
+
+                    $r = $conn->query($client_info);
                     while($client = $r -> fetch_assoc()){
                     ?>
                         <tr>   

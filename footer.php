@@ -1,6 +1,7 @@
 <html>
     <head>
         <style>
+            
             footer{
                 width: 100%;
                 height: fit-content;

@@ -1,0 +1,13 @@
+.main .sidenav{
+    display: flex;
+    flex-direction: row;
+}
+.dashboard{
+    padding: 15px 30px;
+}
+.dashboard .title{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}

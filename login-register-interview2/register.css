@@ -1,0 +1,59 @@
+body{
+    margin: 0;
+    background-image: url('../views/background.jpg');
+    background-size: cover;
+    height: 100vh;
+    color: rgb(41, 41, 41);
+    box-shadow: -850px 0 500px inset white;
+}
+
+.left{
+    position: absolute;
+    right: 0;
+    width: 60%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.left h1{
+    margin: 0 0 20px;
+    font-family: 'Poppins';
+    font-size: 2.2em;
+}
+
+.left form{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+input[type=text], input[type=password], select, input[type=number]{
+    padding: 15px 20px;
+    width: 100%;
+    
+    display: inline-block;
+    box-sizing: border-box;
+    border: 2px solid rgb(145, 135, 135);
+    border-radius: 10px;
+    outline: none;
+}
+
+.left form button{
+    padding: 8px 40px;
+    width: 100%;
+    font-size: 1.5em;
+    background-color: rgb(41, 41, 41);
+    color: white;
+    font-family: 'Poppins';
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.left form button:hover{
+    background-color: rgba(41, 41, 41, 0.725);
+}
