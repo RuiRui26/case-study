@@ -17,8 +17,13 @@ if (!$first_name || !$last_name) {
     exit;
 }
 
-$sql = "SELECT l.Date AS Appointment_Date, l.Time_Start AS Start_Time, l.Time_End AS End_Time, 
-               c.First_Name AS Client_First_Name, c.Last_Name AS Client_Last_Name
+// Query to get lessons for the instructor
+$sql = "SELECT 
+            l.Date AS Appointment_Date, 
+            l.Time_Start AS Start_Time, 
+            l.Time_End AS End_Time, 
+            c.First_Name AS Client_First_Name, 
+            c.Last_Name AS Client_Last_Name
         FROM lesson l
         JOIN staff s ON l.Instructor_ID = s.Staff_ID
         LEFT JOIN client c ON l.Client_ID = c.Client_ID
@@ -29,12 +34,14 @@ $sql = "SELECT l.Date AS Appointment_Date, l.Time_Start AS Start_Time, l.Time_En
 
 $stmt = $conn->prepare($sql);
 
+// Bind instructor first and last name parameters
 $stmt->bind_param("ss", $first_name, $last_name);
 
 $stmt->execute();
 
 $result = $stmt->get_result();
 
+// Check if there are lessons for the instructor
 if ($result->num_rows > 0) {
     echo "<h2>Appointments for {$first_name} {$last_name} (Next Week)</h2>";
     echo "<table border='1'>
@@ -45,6 +52,7 @@ if ($result->num_rows > 0) {
                 <th>Client Name</th>
             </tr>";
     
+    // Loop through the results and display each appointment
     while ($row = $result->fetch_assoc()) {
         echo "<tr>
                 <td>" . $row['Appointment_Date'] . "</td>
@@ -62,3 +70,4 @@ if ($result->num_rows > 0) {
 $stmt->close();
 $conn->close();
 ?>
+
