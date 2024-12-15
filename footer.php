@@ -5,7 +5,7 @@
             footer{
                 width: 100%;
                 height: fit-content;
-                position: static;
+                position: relative;
                 bottom: 0;
                 left: 0;
             }

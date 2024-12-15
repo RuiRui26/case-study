@@ -83,7 +83,7 @@
                             ?>
                                 <a class="link-dark link-underline link-underline-opacity-0" href="dashboard_m_s.php?address=<?php echo $office['Address']?>&c=<?php echo $office['City']?>">
                                     <li class="list-group-item"><h2><?php echo $office['Name'] ?> <span>managed by <?php echo $office['First_Name'] . " " . $office['Last_Name'] ?></span></h2>
-                                    <p class="fulladdress"><?php echo $c . ", " . $office['Address'] ?></p></li>
+                                    <p class="fulladdress"><span style="font-weight: 700; font-size: 1em;">Address:</span> <?php echo $c . ", " . $office['Address'] ?></p></li>
                                 </a>
                                 
                             <?php

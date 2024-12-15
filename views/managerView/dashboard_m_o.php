@@ -43,6 +43,10 @@
             margin: 10px 20px;
         }
 
+        .details h4{
+            font-size: 1em;
+        }
+
         .details h4 .normal{
             font-weight: normal;
         }

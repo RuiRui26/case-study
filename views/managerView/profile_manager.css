@@ -1,36 +1,111 @@
 .profile{
-    margin: 20px 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile .top{
+    display: flex;
+    align-items: end;
+    gap: 20px;
+    padding: 30px 60px;
+    background-color: #8cadbb31;
+    box-shadow: 0 4px 20px -15px black inset;
+}
+
+.profile .top .profile-picture{
+    background-image: url('../car_profile.jpg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: 200px;
+    height: 200px;
+
+    border-radius: 100px;
+}
+
+.profile .top .text{
+    font-size: 4em;
+    font-weight: 700;
+}
+
+.profile .top .text p{
+    margin: 0;
+}
+
+.profile .top .text h1{
+    margin: 0;
+}
+
+
+
+
+
+.info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .personalinfo{
-    border-radius: 10px;
-    margin: 15px 0;
-    padding: 10px 20px;
+    background-color: white;
 
-    background-color: #8cadbb31;
+    padding: 20px 40px;
+    border-right: 1px solid black;
+    width: 350px;
 }
 
 .personalinfo p{
-    font-size: 1.2em;
+    margin: 0;
+    font-size: 1.4em;
+    font-weight: 700;
+}
+
+.personalinfo .infos h3{
+    font-size: 1.4em;
     font-weight: 500;
+    margin: 0;
+}
+
+.personalinfo .infos p{
+    font-size: 1.1em;
+    font-weight: 500;
+    opacity: .8;
+    margin:5px 0;
 }
 
 .personalinfo .infos{
     background-color: white;
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: start;
     padding: 10px 0;
 
 }
 
-.personalinfo .infos div{
-    text-align: center;
+
+.additionalinfo{
+    display: absolute;
+    padding: 20px 30px;
+    width: 30%;
+    text-align: right;
 }
 
-.personalinfo .infos .title{
-
+.additionalinfo .manager{
+    text-align: right;
+    background-color: #d2dade;
+    margin: 10px 0;
+    padding: 15px 30px;
+    border-radius: 20px;
 }
 
-.personalinfo .infos .data{
-
+.additionalinfo .manager h4{
+    color: #2c4550;
+    font-size: 1em;
+    font-weight: 600;
 }
+
+.additionalinfo .manager h4 span{
+    font-size: .8em;
+    font-weight: 600;
+    color: #2c4550b9;
+}
+

@@ -10,7 +10,7 @@
     $city = $data -> fetch_assoc();
 
     $c = $city['city'];
-
+    
 
 ?>
 
@@ -58,6 +58,15 @@
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
+            padding: 10px 5px 0 5px;
+        }
+
+        .addsort{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin: 10px 0;
+            gap: 20px;
         }
     </style>
 </head>
@@ -123,15 +132,73 @@
                                                 WHERE o.Address = '$address' GROUP BY o.Name";
                                                 
                                 $r2 = $conn->query($total_staff);
-                                ?>
-                                <?php while($t_s = $r2 -> fetch_assoc()){ ?>
-                                    <p>Total number of staff: <?php echo $t_s['Total_Staff'] ?></p> 
-                                    <?php
-                                    }
-                                ?>
-                            <a href="../../login-register-interview2/staff_signup.php"><button type="button" class="btn btn-dark">Add New Staff</button></a>
+                            ?>
+                            <?php while($t_s = $r2 -> fetch_assoc()){ ?>
+                                <p>Total number of staff: <?php echo $t_s['Total_Staff'] ?></p> 
+                                <?php
+                                }
+                            ?>
+
+                            <div class="addsort">
+                                <form method="GET" action="">
+                                    <input type="hidden" name="address" value="<?php echo $address?>">
+                                    <select id="filter" name="filter">
+                                        <option hidden>Filter...</option>
+                                        <option value="All">All</option>
+                                        <option disabled>Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option disabled>Position</option>
+                                        <option value="Administrative Staff">Administrative Staff</option>
+                                        <option value="Instructor">Instructor</option>
+                                        <option value="Senior Instructor">Senior Instructor</option>
+                                    </select>
+                                    <button type="submit" style="border-radius: 5px; border:none; padding: 2px 10px;">Filter</button>
+                                </form>
+                                <a href="../../login-register-interview2/staff_signup.php"><button type="button" class="btn btn-dark" style="margin: 0;">Add New Staff</button></a>
+                            </div>
                         </div>
-                        
+
+                        <?php
+                        if (isset($_GET['filter'])) {
+                            $filter = $_GET['filter'];  
+                        }
+                    
+                        $staff_info = "SELECT 
+                        s.Staff_ID AS ID, 
+                        s.First_Name, 
+                        s.Last_Name, 
+                        s.Age,
+                        s.Gender,
+                        s.Phone_Num,
+                        s.Position
+                        FROM staff s
+                        JOIN office o ON s.Office_ID = o.Office_ID
+                        WHERE o.Address = ?";
+                    
+                    if (isset($filter) && $filter !== "All" && $filter !== "Male" && $filter !== "Female") {
+                        $staff_info .= " AND s.Position = ?";
+                    } else if (isset($filter) && $filter !== "All" && $filter !== "Administrative Staff" && $filter !== "Instructor" && $filter !== "Senior Instructor"){
+                        $staff_info .= " AND s.Gender = ?";
+                    } else
+
+                    if (isset($filter) && $filter !== "All" && $filter !== "Male" && $filter !== "Female") {
+                        $staff_info .= " AND s.Position = ?";
+                    }
+                    
+                    $stmt = $conn->prepare($staff_info);
+                    
+                    if (isset($filter) && $filter !== "All") {
+                        $stmt->bind_param("ss", $address, $filter);
+                    } else {
+                        $stmt->bind_param("s", $address);
+                    }
+                    
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    ?>
+                    
+                        <?php if ($result->num_rows > 0) { ?>
                         <table class="table table-hover">
                             <thead>
                                 <tr class="table-dark">
@@ -145,39 +212,28 @@
                                 </tr>
                             </thead>
                             <tbody>
+
                             <?php
-                                $staff_info = "SELECT 
-                                                s.Staff_ID AS ID, 
-                                                s.First_Name, 
-                                                s.Last_Name, 
-                                                s.Age,
-                                                s.Gender,
-                                                s.Phone_Num,
-                                                'Staff' AS Role, 
-                                                s.Position, 
-                                                o.Name AS Office
-                                                FROM staff s
-                                                JOIN office o ON s.Office_ID = o.Office_ID WHERE o.Address = '$address'
-                                                ";
-
-                                $r = $conn->query($staff_info);
-
-                                while($staff = $r -> fetch_assoc()){
-                                ?>
-                                    <tr>   
-                                        <th scope="row"><?php echo $staff['ID']?></th>
-                                        <td><?php echo $staff['First_Name']?></td>
-                                        <td><?php echo $staff['Last_Name']?></td>
-                                        <td><?php echo $staff['Age']?></td>
-                                        <td><?php echo $staff['Gender']?></td>
-                                        <td><?php echo $staff['Phone_Num']?></td>
-                                        <td><?php echo $staff['Position']?></td>
-                                    </tr>
-                                <?php
+                                    while($staff = $result -> fetch_assoc()){
+                                    ?>
+                                        <tr>   
+                                            <th scope="row"><a href="dashboard_m_s_interviews.php?staffid=<?php echo $staff['ID']?>"><?php echo $staff['ID']?></a></th>
+                                            <td><?php echo $staff['First_Name']?></td>
+                                            <td><?php echo $staff['Last_Name']?></td>
+                                            <td><?php echo $staff['Age']?></td>
+                                            <td><?php echo $staff['Gender']?></td>
+                                            <td><?php echo $staff['Phone_Num']?></td>
+                                            <td><?php echo $staff['Position']?></td>
+                                        </tr>
+                                    <?php
+                                    }
+                                } else {
+                                    echo "<tr><p>No job postings found in this category.</p></tr>";
                                 }
                             ?>
                             </tbody>
                         </table>
+                        
                         <br>
                     
                 </div>
@@ -185,7 +241,7 @@
             
         </div>
     </div>
-        
+    <?php $stmt->close(); ?>
     <?php include '../../footer.php' ?>
 </body>
 </html>
