@@ -22,13 +22,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Redirect based on user type
             switch ($row['user_type']) {
                 case 'client':
-                    header("Location: client_dashboard.php");
+                    header("Location: ../views/clientView/lesson_form.php");
                     break;
                 case 'manager':
                     header("Location: ../views/managerView/profile_manager.php");
                     break;
                 case 'staff':
-                    header("Location: staff_dashboard.php");
+                    header("Location: ../views/staffView/staff_dashboard.php");
                     break;
                 default:
                     echo "Invalid user type!";
