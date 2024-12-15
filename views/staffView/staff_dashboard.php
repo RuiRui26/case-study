@@ -53,6 +53,7 @@
     
     <?php  include 'header_staff.php'  ?>
     <?php  include 'dashboard.php'  ?>
+    <?php  include 'staff_session.php'  ?>
 
     <div class="section-header">General Management</div>
     <div class="button-container">
