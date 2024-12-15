@@ -54,19 +54,20 @@
         }
 
         .sort .form{
-            width: 50%;
+            width: 70%;
             display: flex;
             gap: 10px;
             right: 0;
+            justify-content: space-evenly;
+            align-items: center;
         }
 
     </style>
 </head>
-<body style="font-family:'Poppins';">
+<body style="font-family:'Poppins'; min-height: 100vh;">
 
     <?php  include 'header_manager.php'  ?>
     <?php  include 'dashboard.php'  ?>
-    <br>
 
     <div class="main">
         <div class="sidenav">
@@ -100,7 +101,7 @@
                 </div>
             </nav>
         <div class="dashboard">
-            <h1><?php echo $address ?> Office</h1><br>
+            <h1><?php echo $address ?> Office</h1>
             <ul class="nav nav-tabs">
                 
                 <li class="nav-item">
@@ -146,7 +147,7 @@
                             <option value="ASC">Ascending</option>
                             <option value="DESC">Descending</option>
                         </select>
-                        <button type="submit">Sort</button>
+                        <button class="btn btn-dark" type="submit">Sort</button>
                     
                     
                 </form>
@@ -155,7 +156,7 @@
                 
             <table class="table table-hover">
                 <thead>
-                    <tr class="table-primary">
+                    <tr class="table-dark">
                     <th scope="col">ID</th>
                     <th scope="col">First Name</th>
                     <th scope="col">Last Name</th>

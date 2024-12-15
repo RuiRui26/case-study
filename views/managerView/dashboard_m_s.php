@@ -34,7 +34,7 @@
         }
 
         .list-group-item:hover{
-        background-color: #daf0ff;
+        background-color: #cbd9e3;
         transition: 0.4s;
         }
 
@@ -51,6 +51,13 @@
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
+        }
+
+        .add{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
         }
     </style>
 </head>
@@ -93,12 +100,13 @@
                 <div class="dashboard">
                     <div class="title">
                         <h1><?php echo $address ?> Office</h1>
-                        <a href="../../login-register-interview2/staff_signup.php"><button type="button" class="btn btn-primary">Add New Staff</button></a>
+                        
                     </div>
                     
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="#">Staff</a>
+                                
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="dashboard_m_c.php?address=<?php echo $address ?>">Clients</a>
@@ -107,22 +115,36 @@
                                 <a class="nav-link" href="dashboard_m_o.php?address=<?php echo $address ?>">Others</a>
                             </li>
                         </ul>
-                        <br>
-                        <?php 
-                            $total_staff = "SELECT o.Name AS Office_Name, COUNT(s.Staff_ID) AS Total_Staff
-                                            FROM office o
-                                            LEFT JOIN staff s ON o.Office_ID = s.Office_ID
-                                            WHERE o.Address = '$address' GROUP BY o.Name";
-                                            
-                            $r2 = $conn->query($total_staff);
-                            ?>
-                            <?php while($t_s = $r2 -> fetch_assoc()){ ?>
-                                <p>Total number of staff: <?php echo $t_s['Total_Staff'] ?></p> 
-                                <?php
-                                }
-                            ?>
+                        <div class="add">
+                            <?php 
+                                $total_staff = "SELECT o.Name AS Office_Name, COUNT(s.Staff_ID) AS Total_Staff
+                                                FROM office o
+                                                LEFT JOIN staff s ON o.Office_ID = s.Office_ID
+                                                WHERE o.Address = '$address' GROUP BY o.Name";
+                                                
+                                $r2 = $conn->query($total_staff);
+                                ?>
+                                <?php while($t_s = $r2 -> fetch_assoc()){ ?>
+                                    <p>Total number of staff: <?php echo $t_s['Total_Staff'] ?></p> 
+                                    <?php
+                                    }
+                                ?>
+                            <a href="../../login-register-interview2/staff_signup.php"><button type="button" class="btn btn-dark">Add New Staff</button></a>
+                        </div>
                         
-                        <ul class="list-group">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr class="table-dark">
+                                <th scope="col">ID</th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Age</th>
+                                <th scope="col">Gender</th>
+                                <th scope="col">Phone Number</th>
+                                <th scope="col">Position</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                             <?php
                                 $staff_info = "SELECT 
                                                 s.Staff_ID AS ID, 
@@ -130,6 +152,7 @@
                                                 s.Last_Name, 
                                                 s.Age,
                                                 s.Gender,
+                                                s.Phone_Num,
                                                 'Staff' AS Role, 
                                                 s.Position, 
                                                 o.Name AS Office
@@ -141,14 +164,20 @@
 
                                 while($staff = $r -> fetch_assoc()){
                                 ?>
-                                    <a class="link-dark link-underline link-underline-opacity-0" href="dashboard_m_s.php?staffif=<?php echo $staff['ID'] ?>">
-                                        <li class="list-group-item"><h2><?php echo $staff['First_Name'] . " " . $staff['Last_Name'] ?></h2>
-                                        <p><?php echo $staff['Position'] ?></p></li>
-                                    </a>
+                                    <tr>   
+                                        <th scope="row"><?php echo $staff['ID']?></th>
+                                        <td><?php echo $staff['First_Name']?></td>
+                                        <td><?php echo $staff['Last_Name']?></td>
+                                        <td><?php echo $staff['Age']?></td>
+                                        <td><?php echo $staff['Gender']?></td>
+                                        <td><?php echo $staff['Phone_Num']?></td>
+                                        <td><?php echo $staff['Position']?></td>
+                                    </tr>
                                 <?php
                                 }
                             ?>
-                        </ul>
+                            </tbody>
+                        </table>
                         <br>
                     
                 </div>

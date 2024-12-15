@@ -23,13 +23,16 @@
     <link rel="stylesheet" href="dashboard_m.css">
 
     <style>
-        
+        h3{
+            margin: 0;
+            padding: 10px 0;
+        }
         .title{
             display: flex;
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
-            margin: 10px 0 30px 20px;
+            margin: 10px 0 0 0px;
         }
 
         table{
@@ -54,10 +57,9 @@
         }
     </style>
 </head>
-<body style="font-family:'Poppins';">
+<body style="font-family:'Poppins'; max-height: 100vh;">
     <?php  include 'header_manager.php'  ?>
     <?php  include 'dashboard.php'  ?>
-    <br>
     <div class="main">
         <div class="sidenav">
             <nav id="nav" class="nav">
@@ -90,7 +92,7 @@
                 </div>
             </nav>
         <div class="dashboard">
-            <h1><?php echo $address ?> Office</h1><br>
+            <h1><?php echo $address ?> Office</h1>
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <a class="nav-link" href="dashboard_m_s.php?address=<?php echo $address ?>">Staff</a>
@@ -105,8 +107,8 @@
                 <br>
                 <ul class="list-group">
                     <div class="title">
-                        <h2 >Current Manager/s:</h2>
-                        <a href="../../login-register-interview2/manager_signup.php"><button>Add Manager?</button></a>
+                        <h3>Current Manager/s:</h3>
+                        <a href="../../login-register-interview2/manager_signup.php"><button class="btn btn-dark">Add Manager?</button></a>
                     </div>
                     
                     <?php
@@ -125,7 +127,7 @@
                             <li class="list-group-item">
                                 <h2 style="border-bottom: 1px solid black; padding: 10px;"><?php echo $manager['First_Name'] . " " . $manager['Last_Name'] ?></h2>
                                 <div class="details">
-                                    <h4>    Telephone: <span class="normal"><?php echo $manager['Telephone'] ?></span></h4>
+                                    <h4>Telephone: <span class="normal"><?php echo $manager['Telephone'] ?></span></h4>
                                     <h4>Gender: <span class="normal"><?php echo $manager['Gender'] ?></span></h4>
                                     <h4>Age: <span class="normal"><?php echo $manager['Age'] ?></span></h4>
                                 </div>
@@ -152,7 +154,7 @@
                         
                         <table class="table table-hover">
                         <thead>
-                            <tr class="table-primary">
+                            <tr class="table-dark">
                             <th scope="col">ID</th>
                             <th scope="col">Car Registration Number</th>
                             <th scope="col">Allocated to</th>

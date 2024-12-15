@@ -1,5 +1,9 @@
-.main{
+body{
+    min-height: 100vh;
+}
 
+.main{
+    height: fit-content;
 }
 
 .main .sidenav{
