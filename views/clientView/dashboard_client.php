@@ -2,23 +2,32 @@
 session_start();
 
 // Ensure the user is logged in
-if (!isset($_SESSION['client_id'])) {
+if (!isset($_SESSION['user_id'])) {
     echo "Please log in to continue.";
     exit();
 }
 
-// Access the first and last name from session
-$first_name = $_SESSION['first_name'];
-$last_name = $_SESSION['last_name'];
+// Access the user ID from session
+$user_id = $_SESSION['user_id'] ?? null;
 
 include '../../db_connection.php';
 
+// Fetch the user's first and last name from the client table based on the user_id
+if ($user_id) {
+    $stmt = $conn->prepare("SELECT First_Name, Last_Name FROM client WHERE User_ID = ?");
+    $stmt->bind_param("i", $user_id);  // Bind the user_id to the query
+    $stmt->execute();
+    $stmt->bind_result($first_name, $last_name);
+    $stmt->fetch();
+    $stmt->close();
+}
+
+// Query instructors and cars from the database
 $instructors = $conn->query("SELECT Staff_ID, CONCAT(First_Name, ' ', Last_Name) AS Name FROM staff WHERE Position = 'Instructor'");
 $cars = $conn->query("SELECT Car_ID, Registration_No FROM car");
 
 // Handle form submission for booking a lesson
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_POST['logout'])) {
-    $client_id = $_SESSION['client_id'] ?? null;
     $instructor_id = $_POST['instructor_id'] ?? null;
     $car_id = $_POST['car_id'] ?? null;
     $date = $_POST['date'] ?? null;
@@ -36,11 +45,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_POST['logout'])) {
     }
 
     // Validate the inputs
-    if ($client_id && $instructor_id && $car_id && $date && $start_time && $end_time && $fee > 0) {
+    if ($instructor_id && $car_id && $date && $start_time && $end_time && $fee > 0) {
         // Use prepared statements for secure SQL execution
         $stmt = $conn->prepare("INSERT INTO lesson (Client_ID, Instructor_ID, Car_ID, Date, Time_Start, Time_End, Fee, Lesson_Type) 
                                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("iiissdss", $client_id, $instructor_id, $car_id, $date, $start_time, $end_time, $fee, $lesson_type);
+        $stmt->bind_param("iiissdss", $user_id, $instructor_id, $car_id, $date, $start_time, $end_time, $fee, $lesson_type);
 
         if ($stmt->execute()) {
             $success_message = "Lesson booked successfully!";
@@ -59,8 +68,8 @@ if (isset($_POST['logout'])) {
     header("Location: ../../login-register-interview2/login.php");
     exit();
 }
-?>
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -77,7 +86,7 @@ if (isset($_POST['logout'])) {
     <?php include 'header.php'; ?>
     <?php include 'dashboard.php'; ?>
     <br>
-    <h3>Welcome, <?php echo $_SESSION['first_name'] . ' ' . $_SESSION['last_name']; ?>!</h3>
+    <h3>Welcome, <?php echo htmlspecialchars($first_name . ' ' . $last_name); ?>!</h3>
     <div class="container mt-4">
         <h2>Book a Driving Lesson</h2>
 
@@ -145,23 +154,16 @@ if (isset($_POST['logout'])) {
 
     <script>
         document.getElementById('lesson_type').addEventListener('change', function() {
-            var lessonType = this.value;
-            var blockSizeContainer = document.getElementById('block_size_container');
-            var feeInput = document.getElementById('fee');
+            const blockSizeContainer = document.getElementById('block_size_container');
+            const feeInput = document.getElementById('fee');
 
-            if (lessonType === 'block') {
+            if (this.value === 'block') {
                 blockSizeContainer.style.display = 'block';
-                var blockSize = document.getElementById('block_size').value;
-                feeInput.value = blockSize * 45;  // Reduced fee per lesson for block booking
             } else {
                 blockSizeContainer.style.display = 'none';
-                feeInput.value = 50;  // Standard fee for individual lesson
+                feeInput.value = 50;  // Default fee for individual lesson
             }
         });
-
-        // Trigger initial fee update
-        document.getElementById('lesson_type').dispatchEvent(new Event('change'));
     </script>
 </body>
 </html>
-
