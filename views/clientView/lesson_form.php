@@ -1,6 +1,7 @@
 <?php
 include 'header.php';
 include '../../db_connection.php';
+include 'client_session.php';
 
 // Fetch Clients, Instructors, and Cars
 $clients = $conn->query("SELECT Client_ID, CONCAT(First_Name, ' ', Last_Name) AS Name FROM client");

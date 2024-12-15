@@ -1,5 +1,6 @@
 <?php
     include '../../db_connection.php';
+    include 'client_session.php';
     
     $instructors = $conn->query("SELECT Staff_ID, CONCAT(First_Name, ' ', Last_Name) AS Name FROM staff WHERE Position = 'Instructor'");
     $cars = $conn->query("SELECT Car_ID, Registration_No FROM car");
