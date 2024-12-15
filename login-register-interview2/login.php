@@ -19,6 +19,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['user_type'] = $row['user_type'];
             $_SESSION['username'] = $row['username'];
 
+            // Check if the user is a staff and set the staff_id and staff details in session
+            if ($row['user_type'] == 'staff') {
+                $staff_sql = "SELECT * FROM staff WHERE user_id = '" . $row['user_id'] . "'"; // Link user to staff
+                $staff_result = $conn->query($staff_sql);
+                
+                if ($staff_result->num_rows > 0) {
+                    $staff_row = $staff_result->fetch_assoc();
+                    $_SESSION['staff_id'] = $staff_row['Staff_ID']; // Set staff_id from the staff table
+                    $_SESSION['first_name'] = $staff_row['First_Name']; // Set first name
+                    $_SESSION['last_name'] = $staff_row['Last_Name'];  // Set last name
+                    $_SESSION['phone_num'] = $staff_row['Phone_Num'];  // Set phone number
+                    $_SESSION['position'] = $staff_row['Position'];  // Set position
+                    $_SESSION['office_id'] = $staff_row['Office_ID']; // Set office ID
+                } else {
+                    echo "Staff data not found.";
+                    exit();
+                }
+            }
+
             // Redirect based on user type
             switch ($row['user_type']) {
                 case 'client':
