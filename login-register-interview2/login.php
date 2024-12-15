@@ -9,23 +9,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Query to fetch user data
     $sql = "SELECT * FROM user WHERE username = '$username'";
     $result = $conn->query($sql);
-    $sql = "SELECT u.*, c.First_Name, c.Last_Name FROM user u 
-        LEFT JOIN client c ON u.user_id = c.User_ID 
-        WHERE u.username = '$username'";
-    $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
 
         // Verify password
         if (password_verify($password, $row['password'])) {
-            $_SESSION['client_id'] = $row['user_id'];
+            $_SESSION['user_id'] = $row['user_id'];
             $_SESSION['user_type'] = $row['user_type'];
             $_SESSION['username'] = $row['username'];
 
-            $_SESSION['first_name'] = $row['First_Name'];
-            $_SESSION['last_name'] = $row['Last_Name'];
-             
             // Redirect based on user type
             switch ($row['user_type']) {
                 case 'client':
