@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Redirect based on user type
             switch ($row['user_type']) {
                 case 'client':
-                    header("Location: ../views/clientView/dashboard_client.php");
+                    header("Location: ../views/clientView/dashboard_client.php"); //eto?
                     break;
                 case 'manager':
                     header("Location: ../views/managerView/profile_manager.php");
