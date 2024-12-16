@@ -33,13 +33,13 @@ if ($selected_office_id) {
             c.Gender, 
             c.registration_date, 
             o.Name AS Office_Name,
-            dt.Client_Passed AS Test_Passed,
+            dt.is_Passed AS Test_Passed,
             COUNT(dt.DrivingTest_ID) AS Test_Attempts
         FROM client c
         JOIN office o ON c.Office_ID = o.Office_ID
         LEFT JOIN drivingtest dt ON c.Client_ID = dt.Client_ID
         WHERE c.Office_ID = ?
-        GROUP BY c.Client_ID, dt.Client_Passed
+        GROUP BY c.Client_ID, dt.is_Passed
     ";
 
     $stmt = $conn->prepare($client_list_sql);

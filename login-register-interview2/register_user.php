@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         echo "Registration successful!";
-        // header("Refresh: 2; url=login.php");
+        header("Refresh: 2; url=login.php");
     } else {
         echo "Error: " . $conn->error;
     }
