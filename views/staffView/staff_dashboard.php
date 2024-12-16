@@ -68,10 +68,10 @@
     <div class="button-container">
         <button class="button" onclick="loadPage('../../client_display.php')">Client Display</button>
         <button class="button" onclick="loadPage('../../interview_details.php')">Interview Details</button>
-        <button class="button" onclick="loadPage('../../clients_passed.php')">Passed</button>
-        <button class="button" onclick="loadPage('../../client_failing.php')">Failing</button>
+        <button class="button" onclick="loadPage('../../add_interview_details.php')">Add Interview Details</button>
         <button class="button" onclick="loadPage('../../staff.php')">Staff</button>
         <button class="button" onclick="loadPage('../../appointments.php')">Lessons</button>
+
     </div>
 
     <div class="section-header">Car Management</div>
@@ -81,6 +81,12 @@
         <button class="button" onclick="loadPage('../../cars_fault.php')">Cars With Faults</button>
         <button class="button" onclick="loadPage('../../cars_instructor_office.php')">Cars Instructor Assigned</button>
     </div>
+
+    <div class="section-header">Driving Test Management</div>
+<div class="button-container">
+    <button class="button" onclick="loadPage('../../drivingtest_display.php')">Driving Test Info</button>
+    <button class="button" onclick="loadPage('../../add_drivingtest.php')">Add Driving Test Info</button>
+</div>
 
     <div class="iframe-container">
         <iframe id="content-frame" src="../../client_display.php"></iframe>
@@ -95,4 +101,3 @@
     <?php include '../../footer.php'; ?>
 </body>
 </html>
-
