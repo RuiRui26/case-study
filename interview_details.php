@@ -1,7 +1,6 @@
 <?php
 include 'db_connection.php';
 
-
 $instructor_id = isset($_GET['instructor_id']) ? $_GET['instructor_id'] : null;
 
 if ($instructor_id === null) {
@@ -31,16 +30,14 @@ if ($instructor_id === null) {
 
     echo "</select><br><br>
             <input type='submit' value='Submit'>
-        </form>";
-
-    echo "</body>
+        </form>
+    </body>
     </html>";
     exit;
 }
 
-
 $sql = "
-    SELECT i.Interview_ID, i.Date AS Interview_Date, i.Client_License_Status, 
+    SELECT i.Interview_ID, i.Date AS Interview_Date, i.Client_License_Status, i.Notes, 
            c.First_Name AS Client_First_Name, c.Last_Name AS Client_Last_Name,
            s.First_Name AS Instructor_First_Name, s.Last_Name AS Instructor_Last_Name
     FROM interview i
@@ -49,13 +46,9 @@ $sql = "
     WHERE i.Instructor_ID = ?
 ";
 
-
 $stmt = $conn->prepare($sql);
-
-$stmt->bind_param("i", $instructor_id); 
-
+$stmt->bind_param("i", $instructor_id);
 $stmt->execute();
-
 $result = $stmt->get_result();
 
 echo "<!DOCTYPE html>
@@ -95,6 +88,7 @@ if ($result->num_rows > 0) {
                 <th>Interview ID</th>
                 <th>Interview Date</th>
                 <th>Client License Status</th>
+                <th>Notes</th>
                 <th>Client Name</th>
                 <th>Instructor Name</th>
             </tr>";
@@ -104,6 +98,7 @@ if ($result->num_rows > 0) {
                 <td>" . $row['Interview_ID'] . "</td>
                 <td>" . $row['Interview_Date'] . "</td>
                 <td>" . $row['Client_License_Status'] . "</td>
+                <td>" . htmlspecialchars($row['Notes']) . "</td>
                 <td>" . $row['Client_First_Name'] . " " . $row['Client_Last_Name'] . "</td>
                 <td>" . $row['Instructor_First_Name'] . " " . $row['Instructor_Last_Name'] . "</td>
               </tr>";
@@ -120,3 +115,4 @@ echo "</body>
 $stmt->close();
 $conn->close();
 ?>
+
