@@ -91,7 +91,7 @@ $conn->close();
             <div class="main">
                 <div class="top">
                     <h1>LOGIN</h1>
-                    <p>don't have an account yet? <a href="select_user_type.php">Register</a>.</p>
+                    <p>don't have an account yet? <a href="client_signup.php">Register</a>.</p>
                 </div>
                 
                 <form action="" method="POST">

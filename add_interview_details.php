@@ -31,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $stmt->close();
+    header('location: views/staffView/staff_dashboard.php');
 }
 
 $conn->close();
@@ -88,7 +89,7 @@ $conn->close();
     <form method="POST" action="">
         <label for="client_id">Select Client:</label><br>
         <select name="client_id" id="client_id" required>
-            <option value="">-- Select Client --</option>
+            <option value="" hidden>-- Select Client --</option>
             <?php
             if ($result_clients->num_rows > 0) {
                 while ($row = $result_clients->fetch_assoc()) {
@@ -102,7 +103,7 @@ $conn->close();
 
         <label for="instructor_id">Select Instructor:</label><br>
         <select name="instructor_id" id="instructor_id" required>
-            <option value="">-- Select Instructor --</option>
+            <option value="" hidden>-- Select Instructor --</option>
             <?php
             if ($result_instructors->num_rows > 0) {
                 while ($row = $result_instructors->fetch_assoc()) {
@@ -122,10 +123,9 @@ $conn->close();
 
         <label for="license_status">License Status:</label><br>
         <select name="license_status" id="license_status" required>
-            <option value="">-- Select License Status --</option>
-            <option value="Passed">Passed</option>
-            <option value="Failed">Failed</option>
-            <option value="Pending">Pending</option>
+            <option value="" hidden>-- Select License Status --</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
         </select><br>
 
         <button type="submit">Add Interview</button>

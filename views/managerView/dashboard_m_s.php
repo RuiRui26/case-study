@@ -228,7 +228,7 @@
                                     <?php
                                     }
                                 } else {
-                                    echo "<tr><p>No job postings found in this category.</p></tr>";
+                                    echo "<tr><p>There are no staff under this position.</p></tr>";
                                 }
                             ?>
                             </tbody>

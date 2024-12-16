@@ -68,7 +68,6 @@
     <div class="button-container">
         <button class="button" onclick="loadPage('../../client_display.php')">Client Display</button>
         <button class="button" onclick="loadPage('../../interview_details.php')">Interview Details</button>
-        <button class="button" onclick="loadPage('../../add_interview_details.php')">Add Interview Details</button>
         <button class="button" onclick="loadPage('../../staff.php')">Staff</button>
         <button class="button" onclick="loadPage('../../appointments.php')">Lessons</button>
 
