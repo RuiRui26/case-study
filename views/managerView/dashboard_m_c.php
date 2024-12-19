@@ -169,25 +169,23 @@
                 <tbody>
                 <?php
                     $client_info = "SELECT 
-                    c.Client_ID AS ID, 
-                    c.*,
-                    o.Name AS Office,
-                    s.*,
-                    i.*,
-                    (SELECT COUNT(*) 
-                        FROM drivingtest t
-                        WHERE t.client_ID = c.Client_ID AND t.is_Passed = '1') AS Passed,
-                    (SELECT COUNT(*) 
-                        FROM drivingtest t
-                        WHERE t.client_ID = c.Client_ID) AS Total
-                    FROM client c
-                    JOIN office o ON c.Office_ID = o.Office_ID
-                    JOIN lesson l on l.client_id = c.client_ID
-                    join staff s on l.instructor_ID = s.staff_ID
-                    JOIN interview i on i.client_ID = c.client_id
-                    WHERE o.Address = '$address'
-                    ORDER BY $sort_column $order
-                    ";
+                        c.Client_ID AS ID, c.*,
+                        COUNT(DISTINCT l.lesson_id) AS Total_Lessons,
+                        COUNT(DISTINCT i.interview_id) AS Total_Interviews,
+                        (SELECT COUNT(*) 
+                            FROM drivingtest t
+                            WHERE t.client_ID = c.Client_ID AND t.is_Passed = '1') AS Passed,
+                        (SELECT COUNT(*) 
+                            FROM drivingtest t
+                            WHERE t.client_ID = c.Client_ID) AS Total
+                        FROM client c
+                        JOIN office o ON c.Office_ID = o.Office_ID
+                        LEFT JOIN lesson l ON l.client_id = c.Client_ID
+                        LEFT JOIN interview i ON i.client_ID = c.client_id
+                        WHERE o.Address = '$address'
+                        GROUP BY c.Client_ID
+                        ORDER BY $sort_column $order
+                        ";
 
                     $desc = "DESC";
 
