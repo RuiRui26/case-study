@@ -56,7 +56,7 @@ CLIENT
 
 STAFF
 
-Example Account: Staff_E(Username), 12345(Password)
+	Example Account: Staff_E(Username), 12345(Password)
 
 1. The user must create a Staff account in order to proceed to the Staff view.
 
