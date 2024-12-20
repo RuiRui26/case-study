@@ -11,7 +11,7 @@ $sql = "
     FROM car c
     JOIN staff s ON c.Instructor_ID = s.Staff_ID
     JOIN office o ON s.Office_ID = o.Office_ID
-    WHERE o.City = 'Glasgow' AND o.Name = ? AND s.Position = 'Instructor'
+    WHERE o.City = 'Glasgow' AND o.Name = ? AND s.Position IN ('Instructor', 'Senior Instructor')
 ";
 
 $stmt = $conn->prepare($sql);

@@ -28,8 +28,7 @@ $sql = "SELECT
         JOIN staff s ON l.Instructor_ID = s.Staff_ID
         LEFT JOIN client c ON l.Client_ID = c.Client_ID
         WHERE s.First_Name = ? 
-        AND s.Last_Name = ? 
-        AND l.Date BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 7 DAY)
+        AND s.Last_Name = ?
         ORDER BY l.Date, l.Time_Start";
 
 $stmt = $conn->prepare($sql);
