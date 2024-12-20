@@ -37,7 +37,7 @@ $office = $r -> fetch_assoc();
                 <option hidden>Position</option>
                 <option value="Senior Instructor">Senior Instructor</option>
                 <option value="Instructor">Instructor</option>
-                <option value="Admin">Administrative Staff</option>
+                <option value="Administrative Staff">Administrative Staff</option>
             </select><br>
             <select class="form-select" name="Office_ID" id="Office_ID" required>
                 <option hidden>Office</option>

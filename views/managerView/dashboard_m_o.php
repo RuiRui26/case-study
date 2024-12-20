@@ -116,13 +116,7 @@
                     </div>
                     
                     <?php
-                        $manager_info = "SELECT
-                                        m.*,
-                                        o.Name AS Office
-                                        FROM manager m
-                                        JOIN office o ON m.manager_id = o.office_id
-                                        WHERE o.Address = '$address'
-                                        ";
+                        $manager_info = "SELECT m.*, o.Name AS Office FROM office o JOIN manager m ON o.Manager_ID = m.Manager_ID WHERE o.Address = '$address'";
 
                         $r = $conn->query($manager_info);
 
