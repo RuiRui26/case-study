@@ -42,7 +42,7 @@ $result = $stmt->get_result();
 
 // Check if there are lessons for the instructor
 if ($result->num_rows > 0) {
-    echo "<h2>Appointments for {$first_name} {$last_name} (Next Week)</h2>";
+    echo "<h2>Appointments for {$first_name} {$last_name}</h2>";
     echo "<table border='1'>
             <tr>
                 <th>Appointment Date</th>
