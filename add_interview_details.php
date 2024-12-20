@@ -128,7 +128,7 @@ $conn->close();
             <option value="" hidden>-- Select License Status --</option>
             <option value="1">Yes</option>
             <option value="0">No</option>
-        </select><br><br>   
+        </select><br><br>
 
         <button type="submit">Add Interview</button>
     </form>
