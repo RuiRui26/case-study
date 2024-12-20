@@ -68,7 +68,6 @@
     <div class="button-container">
         <button class="button" onclick="loadPage('../../client_display.php')">Client Display</button>
         <button class="button" onclick="loadPage('../../interview_details.php')">Interview Details</button>
-        <button class="button" onclick="loadPage('../../staff.php')">Staff</button>
         <button class="button" onclick="loadPage('../../appointments.php')">Lessons</button>
 
     </div>
@@ -78,7 +77,6 @@
         <button class="button" onclick="loadPage('../../cars.php')">Cars</button>
         <button class="button" onclick="loadPage('../../average_miles.php')">Average Miles Lessons</button>
         <button class="button" onclick="loadPage('../../cars_fault.php')">Cars With Faults</button>
-        <button class="button" onclick="loadPage('../../cars_instructor_office.php')">Cars Instructor Assigned</button>
     </div>
 
     <div class="section-header">Driving Test Management</div>
