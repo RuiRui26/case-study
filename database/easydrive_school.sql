@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 20, 2024 at 06:43 AM
+-- Generation Time: Dec 20, 2024 at 07:15 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -65,7 +65,8 @@ CREATE TABLE `client` (
 INSERT INTO `client` (`Client_ID`, `First_Name`, `Last_Name`, `Gender`, `Age`, `Office_ID`, `User_ID`) VALUES
 (1, 'John', 'David', 'Male', 20, 2, 2),
 (2, 'Maria', 'Elizabeth', 'Female', 21, 2, 3),
-(3, 'Client', 'Example', 'Others', 25, 3, 12);
+(3, 'Client', 'Example', 'Others', 25, 3, 12),
+(4, 'Client', 'Example', 'Others', 25, 2, 15);
 
 -- --------------------------------------------------------
 
@@ -220,7 +221,8 @@ CREATE TABLE `staff` (
 INSERT INTO `staff` (`Staff_ID`, `First_Name`, `Last_Name`, `Phone_Num`, `Age`, `Gender`, `Position`, `Office_ID`, `User_ID`) VALUES
 (1, 'Mikyla', 'Escudero', '0281938103', 21, 'Female', 'Senior Instructor', 2, 1),
 (2, 'Jeremy', 'Hue', '09876543211', 32, 'Male', 'Instructor', 2, 10),
-(3, 'Ejay', 'Madiales', '09283948273', 25, 'Male', 'Administrative Staff', 2, 13);
+(3, 'Ejay', 'Madiales', '09283948273', 25, 'Male', 'Administrative Staff', 2, 13),
+(4, 'Staff', 'Example', '09237849283', 25, 'Male', 'Senior Instructor', 2, 16);
 
 -- --------------------------------------------------------
 
@@ -253,7 +255,9 @@ INSERT INTO `user` (`user_id`, `user_type`, `username`, `password`) VALUES
 (11, 'manager', 'Manager_M', '$2y$10$Cpbx7eYb26t5Hc1UEScQROIH3Mi7dGh.7owT.BvZ8sIIh5U.8ghQy'),
 (12, 'client', 'gmail@gmail.com', '$2y$10$1w.Obh/rWJaUL..hPDga6.kgqtZsxcJ3cHObPpYu0t76nfHpSqLG2'),
 (13, 'staff', 'ejay@gmail.com', '$2y$10$oyU2lnRSbij8O7JZQzgbzuUYh9Fx7xT1nnJucVdDBivnd4F.XnBhO'),
-(14, 'manager', 'Manager_E', '$2y$10$DGfQOgC6GSJUK44q7zbzWuISnYR2lgkNp2b/I52ulTx3clxIODtle');
+(14, 'manager', 'Manager_E', '$2y$10$DGfQOgC6GSJUK44q7zbzWuISnYR2lgkNp2b/I52ulTx3clxIODtle'),
+(15, 'client', 'Client_E', '$2y$10$6JE7CS/ZWZSLxq1bdPl/HeJLUPd8k24TC02ZHf2fncpRwzaB4guxW'),
+(16, 'staff', 'Staff_E', '$2y$10$ac0ZiMgx8nyXBfNxRWExLeJafUFUrEwF3lRBNmlOEe4CxoUzRc2IG');
 
 --
 -- Indexes for dumped tables
@@ -341,7 +345,7 @@ ALTER TABLE `car`
 -- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
-  MODIFY `Client_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Client_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `drivingtest`
@@ -377,13 +381,13 @@ ALTER TABLE `office`
 -- AUTO_INCREMENT for table `staff`
 --
 ALTER TABLE `staff`
-  MODIFY `Staff_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Staff_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Constraints for dumped tables
