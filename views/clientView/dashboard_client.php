@@ -1,52 +1,45 @@
 <?php
 session_start();
 
-// Ensure the user is logged in
 if (!isset($_SESSION['user_id'])) {
     echo "Please log in to continue.";
     exit();
 }
 
-// Access the user ID from session
 $user_id = $_SESSION['user_id'] ?? null;
 
 include '../../db_connection.php';
 
-// Fetch the user's first and last name from the client table based on the user_id
 if ($user_id) {
     $stmt = $conn->prepare("SELECT Client_ID, First_Name, Last_name FROM client WHERE User_ID = ?");
-    $stmt->bind_param("i", $user_id);  // Bind the user_id to the query
+    $stmt->bind_param("i", $user_id); 
     $stmt->execute();
     $stmt->bind_result($client_id, $first_name, $last_name);
     $stmt->fetch();
     $stmt->close();
 }
 
-// Query instructors and cars from the database
 $instructors = $conn->query("SELECT Staff_ID, CONCAT(First_Name, ' ', Last_Name) AS Name FROM staff WHERE Position in ('Instructor', 'Senior Instructor')");
 $cars = $conn->query("SELECT Car_ID, Registration_No FROM car");
 
-// Handle form submission for booking a lesson
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_POST['logout'])) {
     $instructor_id = $_POST['instructor_id'] ?? null;
     $car_id = $_POST['car_id'] ?? null;
     $date = $_POST['date'] ?? null;
     $start_time = $_POST['start_time'] ?? null;
     $end_time = $_POST['end_time'] ?? null;
-    $lesson_type = $_POST['lesson_type'] ?? 'individual';  // Default to 'individual'
-    $block_size = $_POST['block_size'] ?? 5;  // Default to 5 lessons for block booking
+    $lesson_type = $_POST['lesson_type'] ?? 'individual';  
+    $block_size = $_POST['block_size'] ?? 5;  
     $fee = 0;
 
-    // Calculate fee based on lesson type
     if ($lesson_type == 'individual') {
-        $fee = 50;  // Standard fee for individual lesson
+        $fee = 50;  
     } elseif ($lesson_type == 'block') {
-        $fee = $block_size * 45;  // Reduced fee for block of lessons (e.g., $45 per lesson)
+        $fee = $block_size * 45;  
     }
 
-    // Validate the inputs
     if ($instructor_id && $car_id && $date && $start_time && $end_time && $fee > 0) {
-        // Use prepared statements for secure SQL execution
+        
         $stmt = $conn->prepare("INSERT INTO lesson (Client_ID, Instructor_ID, Car_ID, Date, Time_Start, Time_End, Fee) 
                                 VALUES (?, ?, ?, ?, ?, ?, ?)");
         $stmt->bind_param("iiissdd", $client_id, $instructor_id, $car_id, $date, $start_time, $end_time, $fee);
@@ -62,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_POST['logout'])) {
     }
 }
 
-// Handle logout functionality
+
 if (isset($_POST['logout'])) {
     session_destroy();
     header("Location: ../../login-register-interview2/login.php");
