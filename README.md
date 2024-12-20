@@ -19,7 +19,7 @@ There are three ways to install;
 
 1. Open your terminal on your device or in Visual Studio and input the text below.
 
-	git clone https://github.com/RuiRui26/case-study.git
+    git clone https://github.com/RuiRui26/case-study.git
 
 note: You can also clone the repository from the Github Desktop. Proceed to the [main repository’s page](https://github.com/RuiRui26/case-study)
 
@@ -43,8 +43,7 @@ Welcome to EasyDrive School of Motoring! This section covers the guide on naviga
 
 CLIENT
 
-
-	Example Account: Client_E(Username), 12345(Password)
+    Example Account: Client_E(Username), 12345(Password)
 
 1. The user must create a Client account in order to proceed to the Client view.
 
