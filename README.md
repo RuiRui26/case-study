@@ -21,7 +21,7 @@ There are three ways to install;
 
 1. Open your terminal on your device or in Visual Studio and input the text above.
 
-note: You can also clone the repository from the Github Desktop. Proceed to the [main repository’s page](https://github.com/RuiRui26/case-study).
+Note: You can also clone the repository from the Github Desktop. Proceed to the [main repository’s page](https://github.com/RuiRui26/case-study).
 
 2. Make sure the repository’s folder is in xampp>htdocs.
 
