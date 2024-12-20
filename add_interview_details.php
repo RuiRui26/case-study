@@ -85,7 +85,9 @@ $conn->close();
     </style>
 </head>
 <body>
-    <h1>Add New Interview</h1>
+    <?php include 'views/staffView/header_staff.php'?>
+    <br>
+    <h1 style="text-align:center;">Add New Interview</h1>
     <form method="POST" action="">
         <label for="client_id">Select Client:</label><br>
         <select name="client_id" id="client_id" required>
@@ -126,7 +128,7 @@ $conn->close();
             <option value="" hidden>-- Select License Status --</option>
             <option value="1">Yes</option>
             <option value="0">No</option>
-        </select><br>
+        </select><br><br>   
 
         <button type="submit">Add Interview</button>
     </form>

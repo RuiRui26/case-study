@@ -28,7 +28,6 @@
             <a class="navbar-brand" href="">EasyDrive</a>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link" href="staffView.php">Profile</a></li>
                     <li class="nav-item"><a class="nav-link" href="staff_dashboard.php">Dashboard</a></li>
                     <li class="nav-item"><a class="nav-link" href="../../add_interview_details.php">Interview</a></li> 
                 </ul>
