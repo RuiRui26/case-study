@@ -47,15 +47,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_POST['logout'])) {
     // Validate the inputs
     if ($instructor_id && $car_id && $date && $start_time && $end_time && $fee > 0) {
         // Use prepared statements for secure SQL execution
-        $stmt = $conn->prepare("INSERT INTO lesson (Client_ID, Instructor_ID, Car_ID, Date, Time_Start, Time_End, Fee, Lesson_Type) 
-                                VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("iiissdss", $user_id, $instructor_id, $car_id, $date, $start_time, $end_time, $fee, $lesson_type);
+        $stmt = $conn->prepare("INSERT INTO lesson (Client_ID, Instructor_ID, Car_ID, Date, Time_Start, Time_End, Fee) 
+                                VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("iiissdd", $user_id, $instructor_id, $car_id, $date, $start_time, $end_time, $fee);
 
-        if ($stmt->execute()) {
-            $success_message = "Lesson booked successfully!";
-        } else {
-            $error_message = "Error: " . $stmt->error;
-        }
         $stmt->close();
     } else {
         $error_message = "Please fill in all required fields and ensure the fee is valid.";
