@@ -14,10 +14,10 @@ include '../../db_connection.php';
 
 // Fetch the user's first and last name from the client table based on the user_id
 if ($user_id) {
-    $stmt = $conn->prepare("SELECT First_Name, Last_Name FROM client WHERE User_ID = ?");
+    $stmt = $conn->prepare("SELECT Client_ID, First_Name, Last_name FROM client WHERE User_ID = ?");
     $stmt->bind_param("i", $user_id);  // Bind the user_id to the query
     $stmt->execute();
-    $stmt->bind_result($first_name, $last_name);
+    $stmt->bind_result($client_id, $first_name, $last_name);
     $stmt->fetch();
     $stmt->close();
 }
@@ -49,8 +49,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_POST['logout'])) {
         // Use prepared statements for secure SQL execution
         $stmt = $conn->prepare("INSERT INTO lesson (Client_ID, Instructor_ID, Car_ID, Date, Time_Start, Time_End, Fee) 
                                 VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("iiissdd", $user_id, $instructor_id, $car_id, $date, $start_time, $end_time, $fee);
+        $stmt->bind_param("iiissdd", $client_id, $instructor_id, $car_id, $date, $start_time, $end_time, $fee);
 
+        if ($stmt->execute()) {
+            $success_message = "Lesson booked successfully!";
+        } else {
+            $error_message = "Error: " . $stmt->error;
+        }
         $stmt->close();
     } else {
         $error_message = "Please fill in all required fields and ensure the fee is valid.";

@@ -25,7 +25,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="dashboard.php">EasyDrive</a>
+            <a class="navbar-brand" href="#">EasyDrive</a>
         </div>
         <a class="nav-link" href="../../login-register-interview2/logout.php" style="padding: 0 20px;">Logout</a>
     </nav>
