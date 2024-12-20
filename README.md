@@ -19,6 +19,7 @@ There are three ways to install;
 
 1. Open your terminal on your device or in Visual Studio and input the text below.
 
+
     git clone https://github.com/RuiRui26/case-study.git
     
 
