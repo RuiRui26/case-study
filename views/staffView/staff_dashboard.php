@@ -82,7 +82,6 @@
     <div class="section-header">Driving Test Management</div>
 <div class="button-container">
     <button class="button" onclick="loadPage('../../drivingtest_display.php')">Driving Test Info</button>
-    <button class="button" onclick="loadPage('../../add_drivingtest.php')">Add Driving Test Info</button>
 </div>
 
     <div class="iframe-container">
