@@ -153,17 +153,26 @@ if (isset($_POST['logout'])) {
     <?php include '../../footer.php'; ?>
 
     <script>
-        document.getElementById('lesson_type').addEventListener('change', function() {
-            const blockSizeContainer = document.getElementById('block_size_container');
-            const feeInput = document.getElementById('fee');
+      document.getElementById('lesson_type').addEventListener('change', function () {
+    const blockSizeContainer = document.getElementById('block_size_container');
+    const feeInput = document.getElementById('fee');
+    const blockSizeInput = document.getElementById('block_size');
 
-            if (this.value === 'block') {
-                blockSizeContainer.style.display = 'block';
-            } else {
-                blockSizeContainer.style.display = 'none';
-                feeInput.value = 50;  // Default fee for individual lesson
-            }
+    if (this.value === 'block') {
+        blockSizeContainer.style.display = 'block';
+
+        blockSizeInput.addEventListener('input', function () {
+            const blockSize = parseInt(blockSizeInput.value) || 0;
+            feeInput.value = blockSize * 45;
         });
+        
+        const initialBlockSize = parseInt(blockSizeInput.value) || 0;
+        feeInput.value = initialBlockSize * 45;
+    } else {
+        blockSizeContainer.style.display = 'none';
+        feeInput.value = 50; 
+    }
+});
     </script>
 </body>
 </html>
