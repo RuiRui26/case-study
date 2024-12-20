@@ -5,7 +5,7 @@ include 'client_session.php';
 
 // Fetch Clients, Instructors, and Cars
 $clients = $conn->query("SELECT Client_ID, CONCAT(First_Name, ' ', Last_Name) AS Name FROM client");
-$instructors = $conn->query("SELECT Staff_ID, CONCAT(First_Name, ' ', Last_Name) AS Name FROM staff WHERE Position = 'Instructor'");
+$instructors = $conn->query("SELECT Staff_ID, CONCAT(First_Name, ' ', Last_Name) AS Name FROM staff WHERE Position in ('Instructor', 'Senior Instructor')");
 $cars = $conn->query("SELECT Car_ID, Registration_No FROM car");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="mb-3">
             <label for="client_id" class="form-label">Client</label>
             <select name="client_id" id="client_id" class="form-select" required>
-                <option value="">Select a Client</option>
+                <option value="" hidden>Select a Client</option>
                 <?php while ($row = $clients->fetch_assoc()) { ?>
                     <option value="<?= $row['Client_ID'] ?>"><?= $row['Name'] ?></option>
                 <?php } ?>
@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="mb-3">
             <label for="instructor_id" class="form-label">Instructor</label>
             <select name="instructor_id" id="instructor_id" class="form-select" required>
-                <option value="">Select an Instructor</option>
+                <option value="" hidden>Select an Instructor</option>
                 <?php while ($row = $instructors->fetch_assoc()) { ?>
                     <option value="<?= $row['Staff_ID'] ?>"><?= $row['Name'] ?></option>
                 <?php } ?>
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="mb-3">
             <label for="car_id" class="form-label">Car</label>
             <select name="car_id" id="car_id" class="form-select" required>
-                <option value="">Select a Car</option>
+                <option value="" hidden>Select a Car</option>
                 <?php while ($row = $cars->fetch_assoc()) { ?>
                     <option value="<?= $row['Car_ID'] ?>"><?= $row['Registration_No'] ?></option>
                 <?php } ?>

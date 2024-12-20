@@ -23,7 +23,7 @@ if ($user_id) {
 }
 
 // Query instructors and cars from the database
-$instructors = $conn->query("SELECT Staff_ID, CONCAT(First_Name, ' ', Last_Name) AS Name FROM staff WHERE Position = 'Instructor'");
+$instructors = $conn->query("SELECT Staff_ID, CONCAT(First_Name, ' ', Last_Name) AS Name FROM staff WHERE Position in ('Instructor', 'Senior Instructor')");
 $cars = $conn->query("SELECT Car_ID, Registration_No FROM car");
 
 // Handle form submission for booking a lesson
@@ -103,7 +103,7 @@ if (isset($_POST['logout'])) {
             <div class="mb-3">
                 <label for="instructor_id" class="form-label">Instructor</label>
                 <select name="instructor_id" id="instructor_id" class="form-select" required>
-                    <option value="">Select an Instructor</option>
+                    <option value="" hidden>Select an Instructor</option>
                     <?php while ($row = $instructors->fetch_assoc()) { ?>
                         <option value="<?= $row['Staff_ID'] ?>"><?= $row['Name'] ?></option>
                     <?php } ?>
@@ -112,7 +112,7 @@ if (isset($_POST['logout'])) {
             <div class="mb-3">
                 <label for="car_id" class="form-label">Car</label>
                 <select name="car_id" id="car_id" class="form-select" required>
-                    <option value="">Select a Car</option>
+                    <option value="" hidden>Select a Car</option>
                     <?php while ($row = $cars->fetch_assoc()) { ?>
                         <option value="<?= $row['Car_ID'] ?>"><?= $row['Registration_No'] ?></option>
                     <?php } ?>
