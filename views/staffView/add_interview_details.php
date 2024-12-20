@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $stmt->close();
-    header('location: views/staffView/staff_dashboard.php');
+    header('location:staff_dashboard.php');
 }
 
 $conn->close();
