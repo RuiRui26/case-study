@@ -86,18 +86,18 @@ include 'db_connection.php';
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['date'])) {
         $selected_date = $_POST['date'];
 
-        $passed_sql = "
-            SELECT 
-                c.First_Name, 
-                c.Last_Name, 
-                c.Registration_Date, 
-                o.Name AS Office_Name, 
-                dt.Notes AS Test_Notes
-            FROM client c
-            JOIN office o ON c.Office_ID = o.Office_ID
-            JOIN drivingtest dt ON c.Client_ID = dt.Client_ID
-            WHERE dt.is_Passed = 1 AND DATE(c.Registration_Date) = ?
-        ";
+    $passed_sql = "
+        SELECT 
+        c.First_Name, 
+        c.Last_Name, 
+        c.Registration_Date, 
+        o.Name AS Office_Name, 
+        dt.Notes AS Test_Notes
+    FROM client c
+    JOIN office o ON c.Office_ID = o.Office_ID
+    JOIN drivingtest dt ON c.Client_ID = dt.Client_ID
+    WHERE dt.is_Passed = 1 AND dt.Date = ?
+    ";
 
         $stmt = $conn->prepare($passed_sql);
         $stmt->bind_param("s", $selected_date);
