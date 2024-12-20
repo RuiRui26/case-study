@@ -6,7 +6,7 @@ $sql_clients = "SELECT Client_ID, First_Name, Last_Name FROM client";
 $result_clients = $conn->query($sql_clients);
 
 // Fetch instructors from the database
-$sql_instructors = "SELECT Staff_ID, First_Name, Last_Name FROM staff WHERE Position = 'Instructor'";
+$sql_instructors = "SELECT Staff_ID, First_Name, Last_Name FROM staff WHERE Position IN ('Instructor', 'Senior Instructor')";
 $result_instructors = $conn->query($sql_instructors);
 
 // Check for form submission

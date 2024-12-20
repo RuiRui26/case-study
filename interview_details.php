@@ -4,7 +4,7 @@ include 'db_connection.php';
 $instructor_id = isset($_GET['instructor_id']) ? $_GET['instructor_id'] : null;
 
 if ($instructor_id === null) {
-    $sql_instructors = "SELECT Staff_ID, First_Name, Last_Name FROM staff WHERE Position = 'Instructor'";
+    $sql_instructors = "SELECT Staff_ID, First_Name, Last_Name FROM staff WHERE Position IN ('Instructor', 'Senior Instructor')";
     $result_instructors = $conn->query($sql_instructors);
 
     echo "<!DOCTYPE html>
